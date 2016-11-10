@@ -1,0 +1,24 @@
+doctype html
+html(lang='es')
+  head
+    title Error 404
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1')
+    meta(name='description', content='Diseñamos tu propio portafolio profesional en la web 24/7 de forma efectiva, Comparte tu experiencia profesional en un solo lugar, donde quieras y cuando quieras @TeamCromlu')
+    link(rel='icon', type='image/png', href='image/cromlu.ico')
+    // Vista para facebook
+    meta(property='og:title', content='Cromlu: Tu propio portafolio profesional en la web 24/7')
+    meta(property='og:description', content='Comparte tu experiencia profesional en un solo lugar, donde quieras y cuando quieras @TeamCromlu')
+    meta(property='og:image', content='http://cromlu.com/parafacebook.png')
+    meta(property='og:url', content='http://cromlu.com')
+    // Nueva fuente general
+    link(href='https://fonts.googleapis.com/css?family=Oswald|Raleway:900', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', type='text/css', href='/css/404.css')
+  body
+    h1 ERROR 404
+    h2 ¡LO SENTIMOS! LA PAGINA QUE BUSCAS NO FUE ENCONTRADA :(
+    .imagen
+      img(src='/error-404.png')
+    .boton
+      a.regresar(href='/')
+        | ¡REGRESA AQUI! ;)
