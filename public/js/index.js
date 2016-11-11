@@ -125,7 +125,7 @@
                     var elementoUser = listUsuarios.result[j]
                     var wordSolicitada = elementoUser.name.toLowerCase();
                     nameUser = nameUser.toLowerCase()
-                    var coincidenciaMinima = false;
+                    var coincidenciaMinima = 0;
 
                     // Buscando coindicencia de la palabra
                     for(var m = 0; m <= wordSolicitada.length - 1; m++) {
@@ -171,6 +171,7 @@
         var $ArticlesContainer = $('#App_Container').find('.Articles_containers');
         var $txtBoxSearchByName = document.querySelector('#txt_box_search');
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
+        
         // Lectura de Usuarios
         readUsers($boxConntentHtml);
 
@@ -186,11 +187,18 @@
 
         // Filtro por caja de texto by name - Por coincidencia de parte de la palabra
        $btnBoxSearchByName.addEventListener('click', function (ev) {
-
             let nameUser = $txtBoxSearchByName.value;
-
             searchByName(nameUser, $boxConntentHtml);
        })
+
+       $txtBoxSearchByName.addEventListener('keypress', function (event) {
+            let nameUser = $txtBoxSearchByName.value;
+            if(event.charCode === 13) {
+                searchByName(nameUser, $boxConntentHtml);
+            }
+
+       })
+
 
          // Evento click to Delete usuario by id
         // $ArticlesContainer.on('click', '.itemUserDelete', function (ev) {
