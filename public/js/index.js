@@ -118,19 +118,43 @@
 
                 console.log('Comparando el .name con ' + nameUser);
 
+                contentHtml.innerHTML = '';
+
                 // Recorre lista y render Template en html
-                listUserFound = listUsuarios.result.filter(function (element) {
-                    return element.name === nameUser;
-                })
+                for(var j = 0; j <= listUsuarios.result.length - 1; j++) {
+                    var elementoUser = listUsuarios.result[j]
+                    var wordSolicitada = elementoUser.name.toLowerCase();
+                    nameUser = nameUser.toLowerCase()
+                    var coincidenciaMinima = false;
+
+                    // Buscando coindicencia de la palabra
+                    for(var m = 0; m <= wordSolicitada.length - 1; m++) {
+                        if(wordSolicitada[m] !== nameUser[m]) {
+                              console.log('Ya no coincide')
+                              break
+                        }
+                        
+                        console.log(m)
+                        coincidenciaMinima = true;
+                        
+                    }
+
+                    if(coincidenciaMinima === true) {
+                        listUserFound.push(elementoUser);
+                    }
+  
+                }
+
                 console.log('Resultado del filtrado');
                 console.log(listUserFound);
+
                 // Render de kas coincidencias
                 if(listUserFound.length === 0) {
                     contentHtml.innerHTML = 'No se encontraron elementos con ese nombre';
                     
                 } else {
                     contentHtml.innerHTML = '';
-                    
+
                     runList(listUserFound, contentHtml)
                 }
 
@@ -159,7 +183,7 @@
             readUserById(id, $boxConntentHtml)
         })
 
-        // Filtro por caja de texto by name
+        // Filtro por caja de texto by name - Por coincidencia de parte de la palabra
        $btnBoxSearchByName.addEventListener('click', function (ev) {
 
             let nameUser = $txtBoxSearchByName.value;
