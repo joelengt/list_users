@@ -133,13 +133,14 @@
                               console.log('Ya no coincide')
                               break
                         }
-                        
+
                         console.log(m)
-                        coincidenciaMinima = true;
+
+                        coincidenciaMinima++;
                         
                     }
 
-                    if(coincidenciaMinima === true) {
+                    if(coincidenciaMinima === nameUser.length) {
                         listUserFound.push(elementoUser);
                     }
   
