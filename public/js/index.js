@@ -171,7 +171,8 @@
         var $ArticlesContainer = $('#App_Container').find('.Articles_containers');
         var $txtBoxSearchByName = document.querySelector('#txt_box_search');
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
-        
+        var nameUserWord = '';
+
         // Lectura de Usuarios
         readUsers($boxConntentHtml);
 
@@ -191,6 +192,7 @@
             searchByName(nameUser, $boxConntentHtml);
        })
 
+       // Filtro por evento key: enter
        $txtBoxSearchByName.addEventListener('keypress', function (event) {
             let nameUser = $txtBoxSearchByName.value;
             if(event.charCode === 13) {
@@ -199,6 +201,25 @@
 
        })
 
+       // Filter mientras tecleas
+       // $txtBoxSearchByName.addEventListener('keypress', function (event) {
+       //      console.log(event);
+       //      // if($txtBoxSearchByName.value === ) {
+
+       //      // }
+       // })
+
+       // Filter mientras la caja de texto cambia
+       $('#txt_box_search').bind('input', function() { 
+            if($(this).val() === '') {
+               nameUserWord = '';
+               readUsers($boxConntentHtml)
+           }
+
+           nameUserWord = $(this).val()
+           searchByName(nameUserWord, $boxConntentHtml);
+       });
+                  
 
          // Evento click to Delete usuario by id
         // $ArticlesContainer.on('click', '.itemUserDelete', function (ev) {
