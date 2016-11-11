@@ -106,12 +106,46 @@
         }) 
     }
     
+    // Filtrando usuario por nombre
+    function searchByName(nameUser, contentHtml) {
+        let listUserFound = [];
+        $.ajax({
+            url: '/dashboard/usuarios-list/list/0',
+            method: 'get',
+            success: function (listUsuarios) {
+                console.log('Lista obtenida');
+                console.log(listUsuarios);
+
+                console.log('Comparando el .name con ' + nameUser);
+
+                // Recorre lista y render Template en html
+                listUserFound = listUsuarios.result.filter(function (element) {
+                    return element.name === nameUser;
+                })
+                console.log('Resultado del filtrado');
+                console.log(listUserFound);
+                // Render de kas coincidencias
+                if(listUserFound.length === 0) {
+                    contentHtml.innerHTML = 'No se encontraron elementos con ese nombre';
+                    
+                } else {
+                    contentHtml.innerHTML = '';
+                    
+                    runList(listUserFound, contentHtml)
+                }
+
+            }
+        })
+
+    }
+
     // Funcion Principal
     function main() {
         // Obteniendo Contenedo html
         var $boxConntentHtml = document.querySelector('#boxListUsers');
-        var $ArticlesContainer = $('#App_Container').find('.Articles_containers')
-
+        var $ArticlesContainer = $('#App_Container').find('.Articles_containers');
+        var $txtBoxSearchByName = document.querySelector('#txt_box_search');
+        var $btnBoxSearchByName = document.querySelector('#btn_box_search');
         // Lectura de Usuarios
         readUsers($boxConntentHtml);
 
@@ -124,6 +158,14 @@
             // Lectura Template de Usuario por Id
             readUserById(id, $boxConntentHtml)
         })
+
+        // Filtro por caja de texto by name
+       $btnBoxSearchByName.addEventListener('click', function (ev) {
+
+            let nameUser = $txtBoxSearchByName.value;
+
+            searchByName(nameUser, $boxConntentHtml);
+       })
 
          // Evento click to Delete usuario by id
         // $ArticlesContainer.on('click', '.itemUserDelete', function (ev) {
