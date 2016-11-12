@@ -38,6 +38,7 @@
         }
     }
 
+    // Obtener usuario como objeto
     function getUser (element){
         let nuevoUsuario = new Usuario(element.id, element.name, element.last_name, element.address, element.cellphone, element.telephone, element.avatar);
         return nuevoUsuario
@@ -58,12 +59,20 @@
     }
 
     // READ Todos los Usuarios
-    function readUsers(contentHtml) {
+    function readUsers(limitEachPage, contentHtml) {
         // GET :: READ Lista de usuarios
         $.ajax({
             url: '/dashboard/usuarios-list/list/0',
             method: 'get',
             success: function (listUsuarios) {
+
+                getPaginationTemplate(limitEachPage, listUsuarios.result.length);
+
+                // Limitando arreglo segun parametros inicial y final
+                // var arr = [];
+                // for(var t = limiteInicial; t <= limiteFinal; t++) {
+                //     arr.push(listUsuarios.result[t]);
+                // }
 
                 // Recorre lista y render Template en html
                 runList(listUsuarios.result, contentHtml);
@@ -73,23 +82,6 @@
     }
 
     // READ Usuario por id
-    function readUserById(user_id, contentHtml) {
-        // GET :: READ Lista de usuarios
-        $.ajax({
-            url: `/dashboard/usuarios-list/item/0/${ user_id }`,
-            method: 'get',
-            success: function (usuario) {
-
-                // Recorre lista y render Template en html
-                let nuevoUser = getUser(usuario.result);
-
-                contentHtml.innerHTML = nuevoUser.buildUserTemplate();
-
-            }
-        }) 
-    }
-
-    // DELETE Usuario por id
     function readUserById(user_id, contentHtml) {
         // GET :: READ Lista de usuarios
         $.ajax({
@@ -164,6 +156,51 @@
 
     }
 
+    function getPaginationTemplate(limitEachPage, listUsuariosLength) {
+        console.log('Impriminedo lista');
+
+        // Obteniendo Template de Paginacion
+        var listCantidad = listUsuariosLength;
+        console.log('Cantidad: ' + listCantidad);
+        var numberPages =  listCantidad/limitEachPage;
+        var residuo = listCantidad%limitEachPage;
+
+        var $boxPagination = document.querySelector('.PaginationContent');
+
+        if(residuo > 0 && residuo < 10) {
+            console.log('Tiene residuo');
+            numberPages = numberPages + 1;
+        }
+
+        $boxPagination.innerHTML = '';
+
+        console.log('Pagina a imprimir: ' + numberPages);
+
+        // Generar Template con limites
+        for(var g = 1; g <= numberPages; g++) {
+            let value_init;
+            let value_end;
+
+            if(listCantidad >= 10) {
+                console.log('aaa');
+                value_init = (g - 1) * limitEachPage;
+                value_end = (g * limitEachPage) - 1;
+
+                listCantidad = listCantidad - 10;
+
+            } else {
+                console.log('nn');
+                value_init = (g - 1) * limitEachPage;
+                value_end = (g * limitEachPage) + residuo;
+                listCantidad = listCantidad - residuo;
+            }
+
+            $boxPagination.innerHTML += `<li data-init="${ value_init }" data-end="${ value_end }">${ g }</li>`
+        }
+
+
+    }
+
     // Funcion Principal
     function main() {
         // Obteniendo Contenedo html
@@ -173,8 +210,11 @@
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
         var nameUserWord = '';
 
+         // Paginacion
+        var limitePage = 10;
+
         // Lectura de Usuarios
-        readUsers($boxConntentHtml);
+        readUsers(limitePage, $boxConntentHtml);
 
         // Evento click to Read usuario by id
         $ArticlesContainer.on('click', '.itemUser', function (ev) {
@@ -238,7 +278,6 @@
         //     console.log('Ready to update');
         //     // Lectura Template de Usuario por Id
         // })
-
     }
 
     // Inicializando Lectura

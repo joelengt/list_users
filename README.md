@@ -23,11 +23,12 @@ El campo `id` es generado automáticamente, solo deberán ser insertadas las dem
 
 Esta parte evalúa tus conocimientos de HTML, CSS y Javascript. Primero, prioriza la lista de tareas que están debajo de menor a mayor, donde "1" es la tarea de mayor prioridad y "5" la de menor. Piensa en cuál es el objetivo de una agenda. Es muy importante que expliques ¿por qué has priorizado de esta forma? ¿qué cosas tomaste en consideración al asignar la prioridad a cada tarea?.
 
-- Filtrar la tabla por nombre. Implementa una caja de texto que permita filtrar la tabla por la columna nombre.
-- Ordenamiento de columnas. Escribe el código necesario para ordenar cualquier columna de forma ascendente y descendente.
-- Paginación. Divide los resultados en páginas, cada página debe contener 10 filas.
-- Encabezado Fijo. Escribe el código necesario para que al hacer scroll en la página, el encabezado de la tabla permanezca visible todo el tiempo en la parte superior de la página.
-- Avatar en modal. Implementa un mecanismo que permita que al hacer clic en el avatar de un usuario, este se muestre en su tamaño original en una ventana modal.
+1 - Filtrar la tabla por nombre. Implementa una caja de texto que permita filtrar la tabla por la columna nombre.
+
+5 - Ordenamiento de columnas. Escribe el código necesario para ordenar cualquier columna de forma ascendente y descendente.
+2 - Paginación. Divide los resultados en páginas, cada página debe contener 10 filas.
+3 - Encabezado Fijo. Escribe el código necesario para que al hacer scroll en la página, el encabezado de la tabla permanezca visible todo el tiempo en la parte superior de la página.
+4 - Avatar en modal. Implementa un mecanismo que permita que al hacer clic en el avatar de un usuario, este se muestre en su tamaño original en una ventana modal.
 
 Finalmente, elige al menos una tarea e impleméntala. El archivo inicial de trabajo es `index.html`, allí encontrarás una agenda con información de 50 personas. Eres libre de modificar el código a tu antojo y crear cuantos archivos gustes, además, para tu comodidad hemos incluído jQuery. No uses ninguna librería de javascript fuera de jQuery. Tu solución debe funcionar en Chrome, Firefox, Safari e IE8+.
 
