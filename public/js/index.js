@@ -45,9 +45,9 @@
     }
 
     // Recorriendo lista obtenida
-    function runList(array, contentHtml) {
+    function runList(array, limitStart, limitEnd, contentHtml) {
         // Evento ciclo
-        for(var i = 0; i <= array.length - 1; i++) {
+        for(var i = limitStart; i <= limitEnd; i++) {
             var elemento_usuario = array[i];
 
             // Creando nuevo usuario
@@ -67,15 +67,11 @@
             success: function (listUsuarios) {
 
                 getPaginationTemplate(limitEachPage, listUsuarios.result.length);
-
-                // Limitando arreglo segun parametros inicial y final
-                // var arr = [];
-                // for(var t = limiteInicial; t <= limiteFinal; t++) {
-                //     arr.push(listUsuarios.result[t]);
-                // }
+                var valueInit = 0;
+                var valueEnd = 9;
 
                 // Recorre lista y render Template en html
-                runList(listUsuarios.result, contentHtml);
+                runList(listUsuarios.result, valueInit, valueEnd, contentHtml);
 
             }
         })  
@@ -148,7 +144,7 @@
                 } else {
                     contentHtml.innerHTML = '';
 
-                    runList(listUserFound, contentHtml)
+                    runList(listUserFound, 0, listUserFound.length - 1, contentHtml)
                 }
 
             }
@@ -195,7 +191,7 @@
                 listCantidad = listCantidad - residuo;
             }
 
-            $boxPagination.innerHTML += `<li data-init="${ value_init }" data-end="${ value_end }">${ g }</li>`
+            $boxPagination.innerHTML += `<li class="selectPage" data-init="${ value_init }" data-end="${ value_end }">${ g }</li>`
         }
 
 
@@ -206,6 +202,8 @@
         // Obteniendo Contenedo html
         var $boxConntentHtml = document.querySelector('#boxListUsers');
         var $ArticlesContainer = $('#App_Container').find('.Articles_containers');
+        var $ArticlesContainerPages = $('#App_Container').find('.Pagination');
+
         var $txtBoxSearchByName = document.querySelector('#txt_box_search');
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
         var nameUserWord = '';
@@ -260,6 +258,35 @@
            searchByName(nameUserWord, $boxConntentHtml);
        });
                   
+       
+       // Filtro por evento key: enter
+       $ArticlesContainerPages.on('click', '.selectPage', function (ev) {
+            let $this = $(this)
+            console.log(this);
+
+            let $article = $this.closest('.selectPage');
+            let dataInit = $article.data('init');
+            let dataEnd = $article.data('end');
+
+            console.log('Page');
+            console.log(dataInit);
+            console.log(dataEnd);
+
+            $.ajax({
+                url: '/dashboard/usuarios-list/list/0',
+                method: 'get',
+                success: function (listUsuarios) {
+
+                    // Reset html
+                    $boxConntentHtml = '';
+                    
+                    // Recorre lista y render Template en html
+                    runList(listUsuarios.result, dataInit, dataEnd, $boxConntentHtml);
+
+                }
+            })  
+
+        })
 
          // Evento click to Delete usuario by id
         // $ArticlesContainer.on('click', '.itemUserDelete', function (ev) {
