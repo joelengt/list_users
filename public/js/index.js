@@ -278,7 +278,7 @@
                 success: function (listUsuarios) {
 
                     // Reset html
-                    $boxConntentHtml = '';
+                    $boxConntentHtml.innerHTML = '';
                     
                     // Recorre lista y render Template en html
                     runList(listUsuarios.result, dataInit, dataEnd, $boxConntentHtml);
