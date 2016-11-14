@@ -26,8 +26,6 @@
                                         <td>${ this.cellphone }</td>
                                         <td>${ this.telephone }</td>
                                         <td><img src='./images/${ this.avatar }' height="40"></td>
-                                        <td class="itemUserDelete">X</td>
-                                        <td class="itemUserUpdate">U</td>
                                       </tr>`;
             return template_user_item
         }
@@ -152,6 +150,7 @@
 
     }
 
+    // Obtener Render de Paginacion
     function getPaginationTemplate(limitEachPage, listUsuariosLength) {
         console.log('Impriminedo lista');
 
@@ -197,6 +196,8 @@
 
     }
 
+    // Cambiar orden de columna
+
     // Funcion Principal
     function main() {
         // Obteniendo Contenedo html
@@ -207,6 +208,8 @@
         var $txtBoxSearchByName = document.querySelector('#txt_box_search');
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
         var nameUserWord = '';
+
+        var $btn_change_order = document.querySelector('.btn_change_order');
 
          // Paginacion
         var limitePage = 10;
@@ -236,6 +239,14 @@
             if(event.charCode === 13) {
                 searchByName(nameUser, $boxConntentHtml);
             }
+
+       })
+
+        // Evento click to order
+       $btn_change_order.addEventListener('click', function (event) {
+
+        console.log(event);
+        console.log($btn_change_order.value);
 
        })
 
