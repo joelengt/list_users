@@ -49,6 +49,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(methodOverride('_method'))
+app.use(favicon(path.join(__dirname, './public/images/favicon.png')))
 app.use(flash())
 
 
