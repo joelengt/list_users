@@ -4,7 +4,7 @@ var config = {
         mlab: 'mongodb://astrum:astrum@ds145395.mlab.com:45395/node_app'
     },
     postgresql: {
-      local: 'postgres://postgres:@localhost:5432/usuarios' // server
+      local: 'postgres://postgres:postgres@localhost:5432/usuarios' // server
     },
     path_system: {
         server: '/root/usuarios_list'
