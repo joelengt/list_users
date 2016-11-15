@@ -1,8 +1,14 @@
- body {
- 	margin:0;
- 	padding:50px;
- 	font-family: sans-serif;
- }
+body {
+    margin: 0 auto;
+    padding:50px;
+    font-family: sans-serif;
+    background: #f4f4f4;
+}
+
+footer {
+    margin: 0 auto;
+    text-align: center;
+}
     
 h2 {
 	font-size:36px;
@@ -25,9 +31,14 @@ table.TableList__Item {
 	margin:0 0 50px 0
 }
 
+table .header {
+	background-color: #55d65e;
+	color: #FFFFFF;
+}
+
 .TableList__table th,
 .TableList__Item th {
-	background:#ccc;
+	background: #f14848;
 	padding:5px;
 	text-align:center;
 }
@@ -108,4 +119,47 @@ table.TableList__Item {
     .fontsize {font-size:10px}
 }
 
+.TableList__pagination {
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+} 
 
+.selectPage{
+    display: inline-block;
+    padding: .3rem;
+    background: #55d65e;
+    color: white;
+    margin: .2rem;
+    cursor: pointer;
+
+}
+
+.selectPage:hover {
+    background: red;
+}
+
+.TableList__search {
+    margin: 1rem auto;
+
+}
+
+.TableList__search #btn_box_search, .TableList__search .btn_change_order {
+    padding: .2rem .7rem;
+    font-size: 16px;
+    color: white;
+    background: #55d65e;
+    border: 0;
+    border-bottom: 4px solid #0f990a;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.TableList__search #btn_box_search:hover , .TableList__search .btn_change_order:hover {
+    background: #42a53e;
+}
+
+.TableList__search #txt_box_search {
+    padding: .2rem;
+    font-size: 16px;
+}

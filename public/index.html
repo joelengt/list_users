@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>Agenda</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
+    <meta name="description" content="Joel Gonzales Tipismana Full-Stack Web Developer, Emprendedor, Co-Fundador y CEO de @TeamCromlu, youtuber @rktecnology. HTML5, CSS3, JavaScript, ECS6, BackboneJS, NodeJS, MongoDB"/>
+
+    <!-- Esstilos Enlaces CSS -->
     <link rel="icon" type="image/png" href="./images/favicon.png">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="./css/modal/index.css">
+
+    <!--Vista para facebook-->
+    <meta property="og:title" content="Joel Gonzales Tipismana Full-Stack Web Developer" />
+    <meta property="og:description" content="Joel Gonzales Tipismana Full-Stack Web Developer, @joelengt en Twitter, Blogger, Youtuber" />
+    <meta property="og:image" content="http://joelgt.com/assets/paraFacebook.png" />      
+    <meta property="og:url" content="http://joelgt.com/" />
+
 </head>
 <body id="App_Container">
     <div class="App_Container__box">
@@ -27,21 +37,21 @@
                 <div class="TableList__search">
                     <input id="txt_box_search" type="text" placeholder="Ingresa nombre del usuario">
                     <button id="btn_box_search"> Buscar </button>
+                    <button class="btn_change_order">Ordenar</button>
                 </div>
-                
+
                 <!-- Table with Items -->
-                <div class="TableList__table" style="overflow-x:auto;">
-                   <table class="TableList__Item">
-                       <thead id="header">
-                           <tr>
-                               <td class="header__item"><strong>Id</strong></td>
-                               <td class="header__item"><strong>Nombre</strong></td>
-                               <td class="header__item"><strong>Apellido</strong></td>
-                               <td class="header__item"><strong>Dirección</strong></td>
-                               <td class="header__item"><strong>Celular</strong></td>
-                               <td class="header__item"><strong>Teléfono</strong></td>
-                               <td class="header__item"><strong>Avatar</strong></td>
-                               <td class="header__item"><button class="btn_change_order">Ordenar</button></td>
+                <div class="TableList__table">
+                   <table class="TableList__Item table table-bordered fixed">
+                       <thead class="header">
+                           <tr class="cheader">
+                               <th rowspan="2" class="text-center">Id</th>
+                               <th rowspan="2" class="text-center">Nombre</th>
+                               <th rowspan="4" class="text-center">Apellido</th>
+                               <th rowspan="3" class="text-center">Dirección</th>
+                               <th rowspan="2" class="text-center">Celular</th>
+                               <th rowspan="2" class="text-center">Teléfono</th>
+                               <th rowspan="2" class="text-cente success-head">Avatar</th>
                            </tr>
                        </thead>
                        <tbody id= "boxListUsers" class="Articles_containers">
@@ -59,6 +69,9 @@
 
             </div>
         </section>
+        <footer>
+            <p>code & love by <a href="http://joelgt.com" target="_blank">joelgt.com</a></p>
+        </footer>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -69,7 +82,8 @@
           <!-- Modal Caption (Image Text) -->
           <div id="caption"></div>
         </div>
-
+        
+        <!-- Enlaces Script JS -->
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="./js/index.js"></script>
     </div>
