@@ -1,1 +1,2 @@
-COPY users_list FROM '/users/joelengt/desktop/users.txt'  USING DELIMITERS '|'
+COPY users_list FROM '/var/www/users_csv/users.txt'  USING DELIMITERS '|'
+
