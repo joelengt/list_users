@@ -5,6 +5,7 @@
     <title>Agenda</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
     <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 <body id="App_Container">
 
@@ -15,7 +16,7 @@
         <button id="btn_box_search"> Buscar </button>
     </div>
     <table>
-        <thead>
+        <thead id="header">
             <tr>
                 <td><strong>Id</strong></td>
                 <td><strong>Nombre</strong></td>
@@ -32,6 +33,19 @@
     </table>
     <div class="Pagination">
         <div class="PaginationContent">
+        </div>
+    </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- The Close Button -->
+          <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+          <!-- Modal Content (The Image) -->
+          <img class="modal-content" id="img01">
+
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
         </div>
     </div>
 

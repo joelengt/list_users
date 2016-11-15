@@ -25,7 +25,7 @@
                                         <td>${ this.address }</td>
                                         <td>${ this.cellphone }</td>
                                         <td>${ this.telephone }</td>
-                                        <td><img src='./images/${ this.avatar }' height="40"></td>
+                                        <td><img class="imagenAvatar" src='./images/${ this.avatar }' alt="${ this.name } ${ this.last_name }"height="40"></td>
                                       </tr>`;
             return template_user_item
         }
@@ -64,6 +64,7 @@
             method: 'get',
             success: function (listUsuarios) {
 
+                contentHtml.innerHTML = '';
                 getPaginationTemplate(limitEachPage, listUsuarios.result.length);
                 var valueInit = 0;
                 var valueEnd = 9;
@@ -137,7 +138,7 @@
 
                 // Render de kas coincidencias
                 if(listUserFound.length === 0) {
-                    contentHtml.innerHTML = 'No se encontraron elementos con ese nombre';
+                    contentHtml.innerHTML = '<tr>No se encontraron elementos con ese nombre</tr>';
                     
                 } else {
                     contentHtml.innerHTML = '';
@@ -197,6 +198,71 @@
     }
 
     // Cambiar orden de columna
+    function changePosition(htmlContentItems) {
+        console.log('Click');
+        let ContentItems = document.querySelectorAll('.itemUser');
+
+        console.log(ContentItems);
+
+        console.log('--------------------');
+        
+        htmlContentItems.innerHTML = '';
+
+        for (var i = ContentItems.length - 1; i >= 0; i--) {
+            let $item = ContentItems[i];
+            console.log($item.outerHTML);
+
+            htmlContentItems.innerHTML += $item.outerHTML;
+
+        }
+
+        console.log('--------------------');
+
+    }
+    // Modal de image
+    function showModalImage(imagePath, imageAlt) {
+        console.log('Imagen path');
+        console.log(imagePath);
+
+       // Get the modal
+       var modal = document.getElementById('myModal');
+
+       // Get the image and insert it inside the modal - use its "alt" text as a caption
+       var modalImg = document.getElementById("img01");
+       var captionText = document.getElementById("caption");
+
+       modal.style.display = "block";
+       modalImg.src = imagePath;
+       captionText.innerHTML = imageAlt;
+
+       // Get the <span> element that closes the modal
+       var span = document.getElementsByClassName("close")[0];
+
+       // When the user clicks on <span> (x), close the modal
+       span.onclick = function() { 
+         modal.style.display = "none";
+       }
+
+
+    }
+
+    // Nav Fixed and scroll event
+    function ScrollNav() {
+        window.onscroll = changePos;
+
+        function changePos() {
+            var header = document.getElementById("header");
+            if (window.pageYOffset > 90) {
+                header.style.position = "absolute";
+                header.style.top = pageYOffset + "px";
+                header.style.padding = "1rem";
+
+            } else {
+                header.style.position = "";
+                header.style.top = "";
+            }
+        }
+    }
 
     // Funcion Principal
     function main() {
@@ -204,6 +270,7 @@
         var $boxConntentHtml = document.querySelector('#boxListUsers');
         var $ArticlesContainer = $('#App_Container').find('.Articles_containers');
         var $ArticlesContainerPages = $('#App_Container').find('.Pagination');
+
 
         var $txtBoxSearchByName = document.querySelector('#txt_box_search');
         var $btnBoxSearchByName = document.querySelector('#btn_box_search');
@@ -214,18 +281,10 @@
          // Paginacion
         var limitePage = 10;
 
+        $boxConntentHtml.innerHTML = 'Cargando ...';
+
         // Lectura de Usuarios
         readUsers(limitePage, $boxConntentHtml);
-
-        // Evento click to Read usuario by id
-        $ArticlesContainer.on('click', '.itemUser', function (ev) {
-            let $this = $(this)
-            let $article = $this.closest('.itemUser')
-            let id = $article.data('id')
-
-            // Lectura Template de Usuario por Id
-            readUserById(id, $boxConntentHtml)
-        })
 
         // Filtro por caja de texto by name - Por coincidencia de parte de la palabra
        $btnBoxSearchByName.addEventListener('click', function (ev) {
@@ -242,21 +301,12 @@
 
        })
 
-        // Evento click to order
-       $btn_change_order.addEventListener('click', function (event) {
+       $btn_change_order.addEventListener('click', function () {
+            console.log('hi');
 
-        console.log(event);
-        console.log($btn_change_order.value);
+            changePosition($boxConntentHtml)
 
        })
-
-       // Filter mientras tecleas
-       // $txtBoxSearchByName.addEventListener('keypress', function (event) {
-       //      console.log(event);
-       //      // if($txtBoxSearchByName.value === ) {
-
-       //      // }
-       // })
 
        // Filter mientras la caja de texto cambia
        $('#txt_box_search').bind('input', function() { 
@@ -267,8 +317,7 @@
 
            nameUserWord = $(this).val()
            searchByName(nameUserWord, $boxConntentHtml);
-       });
-                  
+       });      
        
        // Filtro por evento key: enter
        $ArticlesContainerPages.on('click', '.selectPage', function (ev) {
@@ -299,23 +348,16 @@
 
         })
 
-         // Evento click to Delete usuario by id
-        // $ArticlesContainer.on('click', '.itemUserDelete', function (ev) {
-        //     let $this = $(this)
-        //     let $article = $this.closest('.itemUser')
-        //     let id = $article.data('id')
-        //     console.log('Ready to delete');
-        //     // Lectura Template de Usuario por Id
-        // })
+       $ArticlesContainer.on('click', '.imagenAvatar', function (ev) {
+        console.log('Click');
+            var imageUrl = this.src
+            var imageAlt = this.alt
+            showModalImage(imageUrl, imageAlt);
 
-        //  // Evento click to Update usuario by id
-        // $ArticlesContainer.on('click', '.itemUserUpdate', function (ev) {
-        //     let $this = $(this)
-        //     let $article = $this.closest('.itemUser')
-        //     let id = $article.data('id')
-        //     console.log('Ready to update');
-        //     // Lectura Template de Usuario por Id
-        // })
+        })
+
+        ScrollNav()
+
     }
 
     // Inicializando Lectura
