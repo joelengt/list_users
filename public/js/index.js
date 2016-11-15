@@ -252,10 +252,15 @@
 
         function changePos() {
             var header = document.getElementById("header");
+            //var item_here = document.querySelector(".header__item");
+
             if (window.pageYOffset > 90) {
                 header.style.position = "absolute";
                 header.style.top = pageYOffset + "px";
-                header.style.padding = "1rem";
+                header.style.margin = "1rem";
+                //$(".header__item").css('background','red');
+                //$(".header__item").css('padding','0rem 2rem');
+
 
             } else {
                 header.style.position = "";
